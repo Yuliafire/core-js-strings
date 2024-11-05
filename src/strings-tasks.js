@@ -20,11 +20,10 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
-   if (typeof value === "string") {
+  if (typeof value === 'string') {
     return value.length;
-   } else {
-    return 0;
-   }
+  }
+  return 0;
 }
 
 /**
@@ -229,8 +228,16 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  let minutesStr = minutes.toString();
+  let secondsStr = seconds.toString();
+  if (minutes < 10) {
+    minutesStr = `0${minutesStr}`;
+  }
+  if (seconds < 10) {
+    secondsStr = `0${secondsStr}`;
+  }
+  return `${minutesStr}:${secondsStr}`;
 }
 
 /**
@@ -244,7 +251,7 @@ function formatTime(/* minutes, seconds */) {
  *   reverseString('12345') => '54321'
  */
 function reverseString(str) {
-   return str.split('').reverse().join('');
+  return str.split('').reverse().join('');
 }
 
 /**
@@ -309,8 +316,11 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  if (str.split('').reverse().join('') === str) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -325,13 +335,13 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord (sentence) {
+function findLongestWord(sentence) {
   const words = sentence.split('');
   let longestWord = '';
 
-  words.forEach(word => {
+  words.forEach((word) => {
     if (words.length > longestWord.length) {
-       longestWord = word;
+      longestWord = word;
     }
   });
   return longestWord;
@@ -363,13 +373,15 @@ function reverseWords(str) {
  *   invertCase('12345') => '12345'
  */
 function invertCase(str) {
-   return str.split('').map(letter => {
-    if (letter === letter.toLowerCase()) {
-      return letter.toUpperCase();
-    }  else {
+  return str
+    .split('')
+    .map((letter) => {
+      if (letter === letter.toLowerCase()) {
+        return letter.toUpperCase();
+      }
       return letter.toLowerCase();
-    }
-   }).join('');
+    })
+    .join('');
 }
 
 /**
@@ -414,8 +426,8 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.replace(/[<>]/g, '');
 }
 
 /**
