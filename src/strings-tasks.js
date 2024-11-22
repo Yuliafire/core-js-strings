@@ -134,8 +134,11 @@ function removeTrailingWhitespaces(/* value */) {
  *   repeatString('', 3) => ''
  *   repeatString('abc', -2) => ''
  */
-function repeatString(/* str, times */) {
-  throw new Error('Not implemented');
+function repeatString(str, times) {
+  if (times < 0) {
+    throw new Error('The "times" parameter must be a non-negative integer.');
+  }
+  return str.repeat(times);
 }
 
 /**
@@ -197,8 +200,8 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  str.startsWith(substr);
 }
 
 /**
@@ -300,8 +303,11 @@ function containsSubstring(str, substring) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str = '') {
+  if (typeof str !== 'string') return 0;
+
+  const match = str.match(/[aeiouyAEIOUY]/g);
+  return match ? match.length : 0;
 }
 
 /**
@@ -398,8 +404,8 @@ function invertCase(str) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `${firstName} ${lastName}`;
 }
 
 /**
