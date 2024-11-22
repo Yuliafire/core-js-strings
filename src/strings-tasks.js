@@ -178,8 +178,22 @@ function removeFirstOccurrences(/* str, value */) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  // Validate the input
+  if (typeof str !== 'string' || typeof value !== 'string') {
+    throw new Error('Both inputs must be strings');
+  }
+
+  // Find the last occurrence of the substring
+  const lastIndex = str.lastIndexOf(value);
+
+  // If the substring is not found, return the original string
+  if (lastIndex === -1) {
+    return str;
+  }
+
+  // Remove the last occurrence of the substring
+  return str.slice(0, lastIndex) + str.slice(lastIndex + value.length);
 }
 
 /**
@@ -194,8 +208,13 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  if (typeof str !== 'string') {
+    throw new Error('Input must be a string');
+  }
+
+  // Use Array.from to iterate over characters and calculate their char codes
+  return Array.from(str).reduce((sum, char) => sum + char.charCodeAt(0), 0);
 }
 
 /**
