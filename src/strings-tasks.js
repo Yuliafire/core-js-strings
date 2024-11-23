@@ -121,10 +121,7 @@ function removeLeadingWhitespaces(value) {
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
 function removeTrailingWhitespaces(value) {
-  if (typeof value !== 'string') {
-    throw new Error('Input must be a string');
-  }
-  return value.replace(/\s+$/, '');
+  return value.trimEnd();
 }
 
 /**
@@ -141,7 +138,7 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  if (times < 0) {
+  if (typeof times !== 'number' || times < 0 || !Number.isInteger(times)) {
     throw new Error('The "times" parameter must be a non-negative integer.');
   }
   return str.repeat(times);
@@ -213,9 +210,7 @@ function sumOfCodes(str) {
   if (typeof str !== 'string') {
     throw new Error('Input must be a string');
   }
-
-  // Use Array.from to iterate over characters and calculate their char codes
-  return Array.from(str).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return str.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
 }
 
 /**
@@ -230,7 +225,7 @@ function sumOfCodes(str) {
  *   startsWith('Hello World', 'Hello') => true
  */
 function startsWith(str, substr) {
-  str.startsWith(substr);
+  return str.startsWith(substr);
 }
 
 /**
@@ -353,10 +348,9 @@ function countVowels(str = '') {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-  if (str.split('').reverse().join('') === str) {
-    return true;
-  }
-  return false;
+  const cleanedStr = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+  const reversedStr = cleanedStr.split('').reverse().join('');
+  return cleanedStr === reversedStr;
 }
 
 /**
@@ -431,7 +425,7 @@ function invertCase(str) {
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-  return `Hello, ${firstName} ${lastName}`;
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
