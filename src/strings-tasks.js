@@ -256,16 +256,10 @@ function endsWith(str, substr) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(minutes, seconds) {
-  let minutesStr = minutes.toString();
-  let secondsStr = seconds.toString();
-  if (minutes < 10) {
-    minutesStr = `0${minutesStr}`;
-  }
-  if (seconds < 10) {
-    secondsStr = `0${secondsStr}`;
-  }
-  return `${minutesStr}:${secondsStr}`;
+function formatTime(hours, minutes) {
+  const formattedHours = String(hours).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  return `${formattedHours}:${formattedMinutes}`;
 }
 
 /**
@@ -294,6 +288,9 @@ function reverseString(str) {
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
 function orderAlphabetically(str) {
+  if (typeof str !== 'string') {
+    throw new Error('Input must be a string');
+  }
   str.split('').sort().join('');
 }
 
