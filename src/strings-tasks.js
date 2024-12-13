@@ -138,6 +138,9 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
+  if (typeof str !== 'string') {
+    throw new Error('The "str" parameter must be a string.');
+  }
   if (typeof times !== 'number' || times < 0 || !Number.isInteger(times)) {
     throw new Error('The "times" parameter must be a non-negative integer.');
   }
@@ -209,6 +212,9 @@ function removeLastOccurrences(str, value) {
 function sumOfCodes(str) {
   if (typeof str !== 'string') {
     throw new Error('Input must be a string');
+  }
+  if (str.length === 0) {
+    return 0;
   }
   return str.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
 }
@@ -291,7 +297,7 @@ function orderAlphabetically(str) {
   if (typeof str !== 'string') {
     throw new Error('Input must be a string');
   }
-  str.split('').sort().join('');
+  return str.split('').sort().join('');
 }
 
 /**
@@ -489,8 +495,12 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  return str.replace(/[A-Za-z]/g, function (c) {
+    return String.fromCharCode(
+      c.charCodeAt(0) + (c.toLowerCase() < 'n' ? 13 : -13)
+    );
+  });
 }
 
 /**
