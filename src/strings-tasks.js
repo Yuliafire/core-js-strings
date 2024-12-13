@@ -499,9 +499,6 @@ function encodeToRot13(/* str */) {
   throw new Error('Not implemented');
 }
 
-
-  
-
 /**
  * Returns playid card id.
  *
