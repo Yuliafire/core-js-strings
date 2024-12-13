@@ -138,11 +138,15 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  if (typeof str !== 'string') {
-    throw new Error('The "str" parameter must be a string.');
-  }
-  if (typeof times !== 'number' || times < 0 || !Number.isInteger(times)) {
-    throw new Error('The "times" parameter must be a non-negative integer.');
+  if (
+    str === null ||
+    str === undefined ||
+    times === null ||
+    times === undefined ||
+    typeof times !== 'number' ||
+    times < 0
+  ) {
+    return '';
   }
   return str.repeat(times);
 }
@@ -211,12 +215,13 @@ function removeLastOccurrences(str, value) {
  */
 function sumOfCodes(str) {
   if (typeof str !== 'string') {
-    throw new Error('Input must be a string');
-  }
-  if (str.length === 0) {
     return 0;
   }
-  return str.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  let sum = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
+  }
+  return sum;
 }
 
 /**
@@ -495,8 +500,21 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const allChars = [
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
+  ];
+  const arrStr = Array.from(str);
+  const newArr = arrStr.map((char) => {
+    const charIndex = allChars[0].indexOf(char);
+    if (charIndex === -1) {
+      return char;
+    }
+    let char2 = char;
+    char2 = allChars[0][charIndex + 13];
+    return char2;
+  });
+  return newArr.join('');
 }
 
 /**
